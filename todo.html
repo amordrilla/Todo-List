@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #task-Input {
+            width: calc(100% - 110px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #add-task {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #add-task:hover {
+            background-color: #ff4c4c;
+        }
+
+        #task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #task-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #task-list li button {
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #task-list li button:hover {
+            background-color: #ff4c4c;
+        }
+
+        @media (max-width: 400px) {
+            #task-Input {
+                width: calc(100% - 100px);
+                margin-bottom: 10px;
+            }
+
+            #add-task {
+                padding: 10px;
+                margin-left: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="task-Input" placeholder="New Task">
+        <button id="add-task">Add Task</button>
+        <ul id="task-list"></ul>
+    </div>
+    <script>
+        const addTaskButton = document.getElementById("add-task");
+        const taskInput = document.getElementById("task-Input");
+        const taskList = document.getElementById("task-list");
+
+        addTaskButton.addEventListener('click', addTask);
+
+        function addTask() {
+            const taskText = taskInput.value;
+            if (taskText === "") return;
+
+            const taskItem = document.createElement('li');
+            taskItem.textContent = taskText;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = () => taskItem.remove();
+
+            taskItem.appendChild(deleteButton);
+
+            taskList.appendChild(taskItem);
+            taskInput.value = "";
+        }
+    </script>
+</body>
+</html>
